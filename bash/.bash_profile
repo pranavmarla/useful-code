@@ -11,7 +11,8 @@ HISTCONTROL=ignorespace # Any lines that start with at least one space are not a
 # Type '!r' and then press the spacebar -- the '!r' will expand to show you what command it is. Once you're satisfied that it's the command you wanted, you can press 'Enter' to actually run it.
 bind Space:magic-space
 
-alias root='sudo -s'
+# alias root='sudo -s'
+alias root='sudo -i' # Apparently, this is the preferred way to gain root access
 alias v='vim'
 alias vi='vim +startinsert' # Open file in 'insert' mode
 alias vr='vim -R' # Open file in read-only mode
