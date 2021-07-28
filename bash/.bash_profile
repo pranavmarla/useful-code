@@ -66,3 +66,79 @@ alias run='docker run --rm -it'
 # alias commit='git commit -a'
 # alias push='clear && git push origin master'
 # alias add='clear && git commit -a && git pull origin master && git push origin master'
+
+# Ansible
+# export ANSTBLE HOST KEY CHECKING-False
+# export ANSIBLE_NOCOWS=0
+# alias runsible='ansible-playbook -i hosts playbook.yaml --ask-pass -c paramiko'beats/hosts /apps/ansible/pranav_workspace/ansible-mng/playbooks/beats/metrics_agent.yaml'
+
+# Fluentd (td-agent)
+alias status='systemctl -l status td-agent'
+alias stop='systemctl stop td-agent'
+alias restart='systemctl restart td-agent'
+
+# Kubernetes
+alias k='kubectl'
+
+# Functions
+
+# Go to a directory using cd, clear the screen and list the contents of that directory.
+cd()
+{
+    # Too many arguments -- print usage statement
+    if (( $# > 1 ))
+    then
+        # Recursively call this function with the argument 'help'
+        cd help
+
+    # No args provided -- go to home directory (i.e. just execute 'cd').
+    elif (( $# == 0 ))
+    then
+        # Note: Using 'command' before a command (here, 'cd') executes that command directly, rather than the alias or function of the same name.
+        command cd
+
+    # Print usage statement
+    elif [[ $1 == "help" ]]
+    then
+        printf "\nPlease use the following format:\n\n"
+        printf "a) To change into a directory, clear the screen and list the contents of that directory:\n\t"
+        printf "cd <DIRECTORY>\n\n"
+        printf "b) To display this usage statement:\n\t"
+        printf "cd help\n\n"
+
+        # NOTE: Can't use 'exit 0' instead, as that logs out of the entire SSH session!
+        return 0
+
+    # Only 1 arg, which is assumed to be the directory
+    else
+        command cd $1
+
+    fi
+
+    clear
+    ls -A
+}
+
+# Safer delete function: List all files that would be deleted and ask user for confirmation first
+r()
+{
+    # Too many arguments -- print usage statement
+    if (( $# > 1 ))
+    then
+        # Recursively call this function with the argument 'help'
+        r help
+    
+    else
+
+        if [[ $1 == "help" ]]
+        then
+            printf "\nPlease use the following format:\n\n"
+            printf "a) To delete one/more files/directories, but only after listing the files that would be deleted and asking for confirmation:\n\t"
+            printf "r <FILE_1> [<FILE_2> ...]\n\n"
+            printf "b) To silently \n"
+            printf "c) To display this usage statement:\n\t"
+            printf "cd help\n\n"
+
+            # NOTE: Can't use 'exit 0' instead, as that logs out of the entire SSH session!
+            return 0
+}
