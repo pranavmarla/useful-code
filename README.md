@@ -1,1 +1,1 @@
-This repository contains useful code snippets that I created.
+This repository contains useful code snippets that I created, uploaded here for future reference.
